@@ -22,6 +22,15 @@
         </span>
       </div>
 
+       <div class="input-field">
+        <select v-model="role" class="browser-default">
+         <option disabled value="">Select Role</option>
+         <option value="user">User</option>
+         <option value="admin">Admin</option>
+       </select>
+       <span class="red-text" v-if="!role">Role is required.</span>
+      </div>
+
       <button class="btn waves-effect" type="submit">Register</button>
     </form>
   </div>
@@ -29,6 +38,8 @@
 
 <script setup>
 import { ref } from 'vue'
+const role = ref('')
+
 
 const username = ref('')
 const email = ref('')
@@ -48,7 +59,8 @@ function handleRegister() {
   const user = {
     username: username.value,
     email: email.value,
-    password: password.value
+    password: password.value,
+    role: role.value
   }
 
   localStorage.setItem('registeredUser', JSON.stringify(user))

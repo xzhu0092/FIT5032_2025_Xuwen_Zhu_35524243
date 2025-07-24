@@ -1,21 +1,30 @@
+<script setup>
+import RatingComponent from '../components/RatingComponent.vue'
+</script>
+
 <template>
   <div class="container">
-    <!-- 三栏布局：左空、中标题、右按钮 -->
+    <!-- Header Row: Title + Buttons -->
     <div class="header-row">
       <div class="left-space"></div>
       <h4 class="title">Welcome to MindConnect</h4>
-      <div class="register-button">
-        <a class="btn blue" href="/register">Register Now</a>
+
+      <div class="button-group">
+        <a class="btn blue" href="/register" style="margin-right: 10px;">Register Now</a>
+        <a class="btn blue" href="/login">Login</a>
       </div>
     </div>
 
-    <!-- 卡片内容 -->
+    <!-- Card Section: For Students, For Professionals, For Seniors -->
     <div class="row">
+      <!-- For Students Card -->
       <div class="col s12 m6 l4">
         <div class="card hoverable">
           <div class="card-content">
             <span class="card-title">For Students</span>
             <p>Anonymous self-assessment, mental health articles, peer discussions.</p>
+            <!-- Rating Component for For Students -->
+            <RatingComponent sectionName="For Students" />
           </div>
           <div class="card-action">
             <a href="#" class="blue-text">Learn More</a>
@@ -23,11 +32,14 @@
         </div>
       </div>
 
+      <!-- For Professionals Card -->
       <div class="col s12 m6 l4">
         <div class="card hoverable">
           <div class="card-content">
             <span class="card-title">For Professionals</span>
             <p>Stress management, mood tracking, professional counseling.</p>
+            <!-- Rating Component for For Professionals -->
+            <RatingComponent sectionName="For Professionals" />
           </div>
           <div class="card-action">
             <a href="#" class="blue-text">Explore</a>
@@ -35,11 +47,14 @@
         </div>
       </div>
 
+      <!-- For Seniors Card -->
       <div class="col s12 m12 l4">
         <div class="card hoverable">
           <div class="card-content">
             <span class="card-title">For Seniors</span>
             <p>Large text, voice assistance, community support for elderly.</p>
+            <!-- Rating Component for For Seniors -->
+            <RatingComponent sectionName="For Seniors" />
           </div>
           <div class="card-action">
             <a href="#" class="blue-text">Get Started</a>
@@ -60,23 +75,30 @@
   flex-wrap: wrap;
 }
 
-/* 左边空白占位（与按钮宽度一致） */
+/* Left space to balance title */
 .left-space {
   width: 120px;
 }
 
-/* 右侧按钮区域 */
-.register-button {
-  width: 120px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* 中间标题居中对齐，占满剩余空间 */
+/* Title centered */
 .title {
   flex: 1;
   text-align: center;
   margin: 0;
 }
+
+/* Button group for Register and Login */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: auto;
+}
+
+.button-group a {
+  margin-right: 10px;
+}
 </style>
+
+
 
