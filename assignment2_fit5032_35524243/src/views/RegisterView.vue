@@ -76,13 +76,18 @@ function handleRegister() {
     username: username.value,
     email: email.value,
     password: password.value,
-    role: role.value
+    role: role.value,
+    ratings: { // 初始化为 null，因为用户还未评分
+      'For Students': null,
+      'For Professionals': null,
+      'For Seniors': null
+    }
   }
 
-  
+  // 将新用户添加到已有的用户列表中
   savedUsers.push(newUser)
 
-  
+  // 保存到 LocalStorage
   localStorage.setItem('users', JSON.stringify(savedUsers))
 
   alert('Registration successful!')
@@ -90,7 +95,6 @@ function handleRegister() {
 </script>
 
 <style scoped>
-
 .input-field {
   margin-bottom: 20px;
 }
@@ -99,4 +103,6 @@ button:disabled {
   background-color: #c1c1c1;
 }
 </style>
+
+
 

@@ -38,6 +38,7 @@ onMounted(() => {
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
   ratings.value = saved
 
+  // 检查当前用户是否已经对该部分评分
   if (currentUser) {
     const existing = saved.find(r => r.user === currentUser.username && r.section === section.sectionName)
     if (existing) {
@@ -53,17 +54,30 @@ function submitRating(score) {
     return
   }
 
-  if (hasRated.value) {
+  const savedRatings = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+
+  // 检查是否已经对当前 section 评分
+  const existing = savedRatings.find(r => r.user === currentUser.username && r.section === section.sectionName)
+  if (existing) {
     alert('You already rated this section.')
     return
   }
 
-  const newRating = { user: currentUser.username, score, section: section.sectionName }
-  ratings.value.push(newRating)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(ratings.value))
+  const newRating = {
+    user: currentUser.username,
+    section: section.sectionName,
+    score
+  }
+
+  savedRatings.push(newRating) // 保留原数据 + 当前用户评分
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(savedRatings)) // 覆盖写入所有数据
+
   currentRating.value = score
   hasRated.value = true
+  ratings.value = savedRatings // 更新组件的本地状态
 }
+
 
 const averageRating = computed(() => {
   if (ratings.value.length === 0) return 0
@@ -92,3 +106,6 @@ const ratingCount = computed(() => ratings.value.filter(r => r.section === secti
   margin-top: 10px;
 }
 </style>
+
+
+

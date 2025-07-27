@@ -1,6 +1,6 @@
 <script setup>
-import RatingComponent from '../components/RatingComponent.vue' // 导入评分组件
 import { ref } from 'vue'
+import RatingComponent from '../components/RatingComponent.vue' // 导入评分组件
 
 const isLoggedIn = ref(false)
 
@@ -11,9 +11,11 @@ if (localStorage.getItem('isLoggedIn') === 'true') {
 
 // 退出登录功能
 function handleLogout() {
+  // 只清除登录相关的数据，不清除用户评分数据
   localStorage.removeItem('isLoggedIn')
   localStorage.removeItem('currentUser')
   localStorage.removeItem('role')
+
   alert('Logged out successfully!')
   window.location.href = '/login' // 跳转到登录页面
 }
@@ -115,6 +117,13 @@ function handleLogout() {
   margin-right: 10px;
 }
 </style>
+
+
+
+
+
+
+
 
 
 
