@@ -32,37 +32,45 @@ const passwordError = ref(false)
 // 检查表单是否有效
 const isFormValid = computed(() => username.value && password.value)
 
-// 登录验证
 function handleLogin() {
-  const storedUser = JSON.parse(localStorage.getItem('registeredUser'))
+  const savedUsers = JSON.parse(localStorage.getItem('users')) || []  // 获取所有用户
 
-  if (!storedUser) {
-    alert('No registered users found!')
+  if (!savedUsers.length) {
+    alert('No users found.')
     return
   }
 
-  if (username.value === storedUser.username && password.value === storedUser.password) {
-    
+  // 查找匹配的用户
+  const user = savedUsers.find(u => u.username === username.value)
+
+  if (!user) {
+    usernameError.value = true
+    passwordError.value = false
+    alert('Username does not exist.')
+    return
+  }
+
+  if (user.password === password.value) {
+    // 登录成功
     localStorage.setItem('isLoggedIn', 'true')
-    localStorage.setItem('currentUser', JSON.stringify(storedUser))
-    localStorage.setItem('role', storedUser.role)
+    localStorage.setItem('currentUser', JSON.stringify(user))
+    localStorage.setItem('role', user.role)
 
     alert('Login successful!')
 
-    
-    if (storedUser.role === 'admin') {
+    // 跳转到主页或角色页面
+    if (user.role === 'admin') {
       window.location.href = '/admin'
     } else {
       window.location.href = '/'
     }
   } else {
-    // 显示错误信息
-    usernameError.value = username.value !== storedUser.username
-    passwordError.value = password.value !== storedUser.password
+    usernameError.value = false
+    passwordError.value = true
+    alert('Incorrect password.')
   }
 }
 </script>
-
 
 <style scoped>
 .input-field {
@@ -73,3 +81,4 @@ button:disabled {
   background-color: #c1c1c1;
 }
 </style>
+

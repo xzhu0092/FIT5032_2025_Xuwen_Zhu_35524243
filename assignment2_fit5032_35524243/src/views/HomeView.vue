@@ -1,5 +1,21 @@
 <script setup>
-import RatingComponent from '../components/RatingComponent.vue'
+import { ref } from 'vue'
+
+const isLoggedIn = ref(false)
+
+// 检查用户是否已登录
+if (localStorage.getItem('isLoggedIn') === 'true') {
+  isLoggedIn.value = true
+}
+
+// 退出登录功能
+function handleLogout() {
+  localStorage.removeItem('isLoggedIn')
+  localStorage.removeItem('currentUser')
+  localStorage.removeItem('role')
+  alert('Logged out successfully!')
+  window.location.href = '/login' // 跳转到登录页面
+}
 </script>
 
 <template>
@@ -10,8 +26,9 @@ import RatingComponent from '../components/RatingComponent.vue'
       <h4 class="title">Welcome to MindConnect</h4>
 
       <div class="button-group">
-        <a class="btn blue" href="/register" style="margin-right: 10px;">Register Now</a>
-        <a class="btn blue" href="/login">Login</a>
+        <a v-if="!isLoggedIn" class="btn blue" href="/register" style="margin-right: 10px;">Register Now</a>
+        <a v-if="!isLoggedIn" class="btn blue" href="/login">Login</a>
+        <button v-if="isLoggedIn" class="btn red" @click="handleLogout">Log Out</button>
       </div>
     </div>
 
@@ -23,8 +40,6 @@ import RatingComponent from '../components/RatingComponent.vue'
           <div class="card-content">
             <span class="card-title">For Students</span>
             <p>Anonymous self-assessment, mental health articles, peer discussions.</p>
-            <!-- Rating Component for For Students -->
-            <RatingComponent sectionName="For Students" />
           </div>
           <div class="card-action">
             <a href="#" class="blue-text">Learn More</a>
@@ -38,8 +53,6 @@ import RatingComponent from '../components/RatingComponent.vue'
           <div class="card-content">
             <span class="card-title">For Professionals</span>
             <p>Stress management, mood tracking, professional counseling.</p>
-            <!-- Rating Component for For Professionals -->
-            <RatingComponent sectionName="For Professionals" />
           </div>
           <div class="card-action">
             <a href="#" class="blue-text">Explore</a>
@@ -53,8 +66,6 @@ import RatingComponent from '../components/RatingComponent.vue'
           <div class="card-content">
             <span class="card-title">For Seniors</span>
             <p>Large text, voice assistance, community support for elderly.</p>
-            <!-- Rating Component for For Seniors -->
-            <RatingComponent sectionName="For Seniors" />
           </div>
           <div class="card-action">
             <a href="#" class="blue-text">Get Started</a>
@@ -66,6 +77,7 @@ import RatingComponent from '../components/RatingComponent.vue'
 </template>
 
 <style scoped>
+
 .header-row {
   display: flex;
   justify-content: space-between;
@@ -75,19 +87,16 @@ import RatingComponent from '../components/RatingComponent.vue'
   flex-wrap: wrap;
 }
 
-/* Left space to balance title */
 .left-space {
   width: 120px;
 }
 
-/* Title centered */
 .title {
   flex: 1;
   text-align: center;
   margin: 0;
 }
 
-/* Button group for Register and Login */
 .button-group {
   display: flex;
   justify-content: flex-end;
@@ -95,10 +104,11 @@ import RatingComponent from '../components/RatingComponent.vue'
   width: auto;
 }
 
-.button-group a {
+.button-group a, .button-group button {
   margin-right: 10px;
 }
 </style>
+
 
 
 
