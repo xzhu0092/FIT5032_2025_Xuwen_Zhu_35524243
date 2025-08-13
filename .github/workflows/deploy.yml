@@ -5,28 +5,36 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+
+env:
+  WORKDIR: xzhu-library   
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+
       - name: Install deps
+        working-directory: ${{ env.WORKDIR }}
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm i; fi
+
       - name: Build
+        working-directory: ${{ env.WORKDIR }}
         run: npm run build
+
       - name: SPA Fallback
-        run: cp ./dist/index.html ./dist/404.html || true
+        run: |
+          cp ${{ env.WORKDIR }}/dist/index.html ${{ env.WORKDIR }}/dist/404.html || true
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: dist
+          folder: ${{ env.WORKDIR }}/dist
           clean: true
+
 
