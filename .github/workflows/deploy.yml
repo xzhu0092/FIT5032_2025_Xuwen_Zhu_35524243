@@ -3,32 +3,34 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+
 permissions:
   contents: write
 
 env:
-  WORKDIR: xzhu-library   
+  WORKDIR: xzhu-library   # ← 改成你要发布的子目录名
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: npm }
+        with:
+          node-version: 20
 
       - name: Install deps
         working-directory: ${{ env.WORKDIR }}
-        run: |
-          if [ -f package-lock.json ]; then npm ci; else npm i; fi
+        run: npm i
 
       - name: Build
         working-directory: ${{ env.WORKDIR }}
         run: npm run build
 
+      # SPA 刷新 404 处理
       - name: SPA Fallback
-        run: |
-          cp ${{ env.WORKDIR }}/dist/index.html ${{ env.WORKDIR }}/dist/404.html || true
+        run: cp ${{ env.WORKDIR }}/dist/index.html ${{ env.WORKDIR }}/dist/404.html || true
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
@@ -36,5 +38,6 @@ jobs:
           branch: gh-pages
           folder: ${{ env.WORKDIR }}/dist
           clean: true
+
 
 
