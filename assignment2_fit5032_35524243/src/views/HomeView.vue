@@ -106,6 +106,11 @@ function handleLogout() {
   Data Tables
 </router-link>
 
+<router-link to="/functions" class="btn" style="margin-left:8px">
+  Cloud Functions Demo
+</router-link>
+
+
          <!-- 跳转到 /admin 的按钮 -->
     <div class="center-align" style="margin-top:20px">
       <router-link to="/admin" class="btn">Go to Admin</router-link>
