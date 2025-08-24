@@ -80,6 +80,15 @@ function handleLogout() {
             <a href="#" class="blue-text">Get Started</a>
           </div>
         </div>
+  <router-link to="/email" class="btn" style="margin-left:8px">Send Email</router-link>
+<router-link  to="/tables" class="btn" style="margin-left:8px">
+  Data Tables
+</router-link>
+
+         <!-- 跳转到 /admin 的按钮 -->
+    <div class="center-align" style="margin-top:20px">
+      <router-link to="/admin" class="btn">Go to Admin</router-link>
+    </div>
       </div>
     </div>
 
