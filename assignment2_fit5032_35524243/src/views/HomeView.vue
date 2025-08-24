@@ -28,11 +28,32 @@ function handleLogout() {
       <div class="left-space"></div>
       <h4 class="title">Welcome to MindConnect</h4>
 
-      <div class="button-group">
-        <a v-if="!isLoggedIn" class="btn blue" href="/register" style="margin-right: 10px;">Register Now</a>
-        <a v-if="!isLoggedIn" class="btn blue" href="/login">Login</a>
-        <button v-if="isLoggedIn" class="btn red" @click="handleLogout">Log Out</button>
-      </div>
+   <div class="button-group">
+  <router-link
+    v-if="!isLoggedIn"
+    class="btn blue"
+    to="/register"
+    style="margin-right: 10px;"
+  >
+    Register Now
+  </router-link>
+
+  <router-link
+    v-if="!isLoggedIn"
+    class="btn blue"
+    to="/login"
+  >
+    Login
+  </router-link>
+
+  <button
+    v-if="isLoggedIn"
+    class="btn red"
+    @click="handleLogout"
+  >
+    Log Out
+  </button>
+</div>
     </div>
 
     <!-- Card Section: For Students, For Professionals, For Seniors -->
