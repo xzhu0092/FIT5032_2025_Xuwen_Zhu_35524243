@@ -6,7 +6,7 @@ import AdminView from '../views/AdminView.vue'
 import LoginView from '../views/LoginView.vue'
 import EmailView from '../views/EmailView.vue'
 import TablesView from '../views/TablesView.vue'
-
+import MapView from '../views/MapView.vue'
 import FunctionsDemo from '../views/FunctionsDemo.vue'
 
 // ★ 新增：引入我们刚做好的 firebase 工具
@@ -18,7 +18,7 @@ const routes = [
   { path: '/login', name: 'login', component: LoginView },
   { path: '/email', name: 'email', component: EmailView, meta: { requiresAuth: true } }, // ★ 新增：任何登录用户可访问
   { path: '/tables', name: 'tables', component: TablesView, meta: { requiresAuth: true } }, 
-   { path: '/functions', name: 'functions', component: FunctionsDemo },
+    { path: '/functions', name: 'functions', component: FunctionsDemo }, { path: '/map', name: 'map', component: MapView },
   { path: '/admin', name: 'admin', component: AdminView, meta: { requiresAuth: true, requiresAdmin: true } },
 ]
 

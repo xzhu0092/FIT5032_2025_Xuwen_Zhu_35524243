@@ -13,6 +13,9 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "firebase": "^12.1.0",
+    "leaflet": "^1.9.4",
+    "leaflet-control-geocoder": "^3.3.0",
+    "leaflet-routing-machine": "^3.2.12",
     "materialize-css": "^1.0.0",
     "vue": "^3.5.17",
     "vue-good-table-next": "^0.2.2",

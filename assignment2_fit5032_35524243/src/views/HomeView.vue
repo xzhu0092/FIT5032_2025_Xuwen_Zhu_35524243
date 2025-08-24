@@ -110,6 +110,10 @@ function handleLogout() {
   Cloud Functions Demo
 </router-link>
 
+<router-link to="/map" class="btn" style="margin-left:8px">
+  Map 
+</router-link>
+
 
          <!-- 跳转到 /admin 的按钮 -->
     <div class="center-align" style="margin-top:20px">
