@@ -22,138 +22,146 @@ function handleLogout() {
 </script>
 
 <template>
-  <div class="container">
-    <!-- Header Row: Title + Buttons -->
-    <div class="header-row">
-      <div class="left-space"></div>
-      <h4 class="title">Welcome to MindConnect</h4>
+  <div class="container home">
 
-   <div class="button-group">
-  <router-link
-    v-if="!isLoggedIn"
-    class="btn blue"
-    to="/register"
-    style="margin-right: 10px;"
-  >
-    Register Now
-  </router-link>
+    <!-- 顶部工具栏：左侧品牌，右侧登录/注册或登出 -->
+    <header class="topbar" role="banner">
+      <div class="brand">MindConnect</div>
 
-  <router-link
-    v-if="!isLoggedIn"
-    class="btn blue"
-    to="/login"
-  >
-    Login
-  </router-link>
+      <nav class="auth-actions" aria-label="authentication">
+        <router-link
+          v-if="!isLoggedIn"
+          class="btn-flat btn-small"
+          to="/register"
+          aria-label="Register Now"
+        >Register Now</router-link>
 
-  <button
-    v-if="isLoggedIn"
-    class="btn red"
-    @click="handleLogout"
-  >
-    Log Out
-  </button>
-</div>
-    </div>
+        <router-link
+          v-if="!isLoggedIn"
+          class="btn-flat btn-small"
+          to="/login"
+          aria-label="Login"
+        >Login</router-link>
 
-    <!-- Card Section: For Students, For Professionals, For Seniors -->
-    <div class="row">
-      <!-- For Students Card -->
-      <div class="col s12 m6 l4">
-        <div class="card hoverable">
-          <div class="card-content">
-            <span class="card-title">For Students</span>
-            <p>Anonymous self-assessment, mental health articles, peer discussions.</p>
-            <!-- Rating Component for For Students -->
-            <RatingComponent sectionName="For Students" />
+        <button
+          v-if="isLoggedIn"
+          class="btn red darken-1 btn-small"
+          @click="handleLogout"
+          aria-label="Log out"
+        >Log Out</button>
+      </nav>
+    </header>
+
+    <!-- 居中标题 -->
+    <section class="hero center-align">
+      <h1 class="hero-title">Welcome to MindConnect</h1>
+      <p class="hero-subtitle">Support for individuals facing mental health challenges</p>
+    </section>
+
+    <!-- 三张等高卡片 -->
+    <section class="cards" aria-label="audience sections">
+      <div class="row no-margin">
+        <div class="col s12 m6 l4 card-col">
+          <div class="card hoverable card-fill">
+            <div class="card-content">
+              <span class="card-title">For Students</span>
+              <p>Anonymous self‑assessment, mental health articles, peer discussions.</p>
+              <div class="rating-wrap">
+                <RatingComponent sectionName="For Students" />
+              </div>
+            </div>
+            <div class="card-action"><a class="link" href="#" aria-label="Learn more for students">Learn More</a></div>
           </div>
-          <div class="card-action">
-            <a href="#" class="blue-text">Learn More</a>
+        </div>
+
+        <div class="col s12 m6 l4 card-col">
+          <div class="card hoverable card-fill">
+            <div class="card-content">
+              <span class="card-title">For Professionals</span>
+              <p>Stress management, mood tracking, professional counseling.</p>
+              <div class="rating-wrap">
+                <RatingComponent sectionName="For Professionals" />
+              </div>
+            </div>
+            <div class="card-action"><a class="link" href="#" aria-label="Explore for professionals">Explore</a></div>
+          </div>
+        </div>
+
+        <div class="col s12 m12 l4 card-col">
+          <div class="card hoverable card-fill">
+            <div class="card-content">
+              <span class="card-title">For Seniors</span>
+              <p>Large text, voice assistance, community support for elderly.</p>
+              <div class="rating-wrap">
+                <RatingComponent sectionName="For Seniors" />
+              </div>
+            </div>
+            <div class="card-action"><a class="link" href="#" aria-label="Get started for seniors">Get Started</a></div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- For Professionals Card -->
-      <div class="col s12 m6 l4">
-        <div class="card hoverable">
-          <div class="card-content">
-            <span class="card-title">For Professionals</span>
-            <p>Stress management, mood tracking, professional counseling.</p>
-            <!-- Rating Component for For Professionals -->
-            <RatingComponent sectionName="For Professionals" />
-          </div>
-          <div class="card-action">
-            <a href="#" class="blue-text">Explore</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- For Seniors Card -->
-      <div class="col s12 m12 l4">
-        <div class="card hoverable">
-          <div class="card-content">
-            <span class="card-title">For Seniors</span>
-            <p>Large text, voice assistance, community support for elderly.</p>
-            <!-- Rating Component for For Seniors -->
-            <RatingComponent sectionName="For Seniors" />
-          </div>
-          <div class="card-action">
-            <a href="#" class="blue-text">Get Started</a>
-          </div>
-        </div>
-  <router-link to="/email" class="btn" style="margin-left:8px">Send Email</router-link>
-<router-link  to="/tables" class="btn" style="margin-left:8px">
-  Data Tables
-</router-link>
-
-<router-link to="/functions" class="btn" style="margin-left:8px">
-  Cloud Functions Demo
-</router-link>
-
-<router-link to="/map" class="btn" style="margin-left:8px">
-  Map 
-</router-link>
-
-
-         <!-- 跳转到 /admin 的按钮 -->
-    <div class="center-align" style="margin-top:20px">
-      <router-link to="/admin" class="btn">Go to Admin</router-link>
-    </div>
-      </div>
-    </div>
+    <!-- 功能按钮工具条（自适应换行） -->
+    <section class="toolbelt" aria-label="quick actions">
+      <router-link to="/email" class="btn teal lighten-1 tool-btn">Send Email</router-link>
+      <router-link to="/tables" class="btn teal lighten-1 tool-btn">Data Tables</router-link>
+      <router-link to="/functions" class="btn teal lighten-1 tool-btn">Cloud Functions Demo</router-link>
+      <router-link to="/map" class="btn teal lighten-1 tool-btn">Map</router-link>
+      <router-link to="/admin" class="btn grey darken-1 tool-btn">Go to Admin</router-link>
+    </section>
 
   </div>
 </template>
 
 <style scoped>
-.header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
+/* 总体间距 */
+.home { padding-top: 8px; padding-bottom: 40px; }
+
+/* 顶部工具栏 */
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:8px 0;
+}
+.brand{
+  font-size:20px; font-weight:700; letter-spacing:.3px;
+}
+.auth-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.btn-flat{
+  border-radius:999px; padding:0 14px;
+  border:1px solid rgba(0,0,0,.2);
 }
 
-.left-space {
-  width: 120px;
+/* 英雄标题 */
+.hero{ margin:12px 0 24px; }
+.hero-title{ margin:0 0 6px; font-weight:800; letter-spacing:.4px; }
+.hero-subtitle{ margin:0; color:#607d8b; }
+
+/* 卡片：等高布局 */
+.no-margin{ margin:0; }
+.card-col{ display:flex; }
+.card-fill{
+  display:flex; flex-direction:column; width:100%;
+  border-radius:14px; overflow:hidden;
+}
+.card-content{ flex:1 1 auto; }
+.card-action{ border-top:0; padding-top:0; }
+.link{ color:#1976d2; }
+.rating-wrap{ margin-top:8px; }
+
+/* 工具条按钮：居中、可换行、间距统一 */
+.toolbelt{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
+  margin-top:10px;
+}
+.tool-btn{
+  border-radius:10px; padding:0 16px; font-weight:600;
 }
 
-.title {
-  flex: 1;
-  text-align: center;
-  margin: 0;
-}
-
-.button-group {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: auto;
-}
-
-.button-group a, .button-group button {
-  margin-right: 10px;
+/* 小屏优化 */
+@media (max-width: 600px){
+  .hero-title{ font-size:28px; }
+  .brand{ font-size:18px; }
 }
 </style>
 
